@@ -1,6 +1,3 @@
-Here’s the cleaned-up **README.md** (no Git stuff), covering everything we built so far:
-
-```md
 # Nova (Free) — General Chat + SEO / Research / Article Writing
 
 A minimal, fast stack for a free-tier assistant:
