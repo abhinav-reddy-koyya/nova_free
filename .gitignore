@@ -1,0 +1,14 @@
+@"
+backend/venv/
+frontend/node_modules/
+frontend/.next/
+frontend/.turbo/
+frontend/.vercel/
+
+.env
+backend/.env
+frontend/.env
+
+*.log
+.vscode/
+"@ | Set-Content -Encoding UTF8 .gitignore

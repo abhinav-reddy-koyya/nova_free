@@ -1,0 +1,240 @@
+/* -------------------
+   THEME + RESET
+------------------- */
+* { box-sizing: border-box }
+:root{
+  --bg:#0b0f14;
+  --panel:#0e1726;
+  --panel-2:#0b1320;
+  --text:#e8f6ff;
+  --muted:#bfe1ffcc;
+  --accent:#2a72ff;
+  --border:#1b2336;
+  --bubble:#142038;
+  --bubble-me:#2a72ff;
+  --shadow: 0 6px 20px rgba(0,0,0,.25);
+}
+
+html, body { margin:0; height:100% }
+body{
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* -------------------
+   HEADER / NAV
+------------------- */
+.nav{
+  position: sticky; top:0; z-index:10;
+  display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  padding:12px 18px;
+  background:var(--panel-2);
+  border-bottom:1px solid var(--border);
+}
+.brand{ font-weight:700; letter-spacing:.3px }
+.nav a{ color: var(--muted); text-decoration:none; margin-right:12px }
+.badge{ font-size:12px; opacity:.85 }
+
+/* -------------------
+   LAYOUT + CARDS
+------------------- */
+.container{ max-width:960px; margin:24px auto; padding:0 16px }
+.card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+}
+.chat{ display:flex; flex-direction:column; gap:12px; padding:16px }
+
+/* Right-side instructions panel + responsive grid */
+.layout { display:grid; grid-template-columns: 1fr; gap:16px }
+.maincol { min-width:0 }
+.sidecol { min-width:0 }
+
+@media (min-width: 980px){
+  .layout { grid-template-columns: minmax(0,1fr) 340px }
+}
+
+.panel{
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: var(--shadow);
+}
+
+/* -------------------
+   TOOLBAR / INPUTS
+------------------- */
+.toolbar{
+  display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+  padding:12px;
+  background: rgba(255,255,255,.03);
+  border:1px solid var(--border);
+  border-radius:12px;
+}
+label{ opacity:.9 }
+select, textarea, input{
+  background:var(--panel);
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:10px;
+}
+select{ padding:8px 10px }
+textarea{
+  width:100%;
+  min-height:120px;
+  padding:12px;
+  background:#0c1422;
+}
+
+/* -------------------
+   MESSAGES / BUBBLES
+------------------- */
+.messages{
+  max-height:60vh;
+  overflow:auto;
+  padding:10px;
+  background:#0c1422;
+  border:1px solid var(--border);
+  border-radius:12px;
+}
+.msg{ display:flex; margin:10px 0 }
+.msg.user{ justify-content:flex-end }
+.msg.ai{ justify-content:flex-start }
+
+.bubble{
+  max-width:75%;
+  padding:12px 14px;
+  border-radius:14px;
+  white-space:pre-wrap;
+  line-height:1.45;
+}
+.msg.user .bubble{
+  background:var(--bubble-me);
+  color:#fff;
+  border-bottom-right-radius:6px
+}
+.msg.ai .bubble{
+  background:var(--bubble);
+  border-bottom-left-radius:6px
+}
+
+/* -------------------
+   BUTTONS / ACTIONS
+------------------- */
+.actions{ display:flex; gap:10px; margin-top:10px }
+button{
+  padding:10px 14px;
+  border:0;
+  border-radius:10px;
+  cursor:pointer;
+  background:var(--accent);
+  color:#fff;
+  box-shadow:var(--shadow);
+  transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+}
+button:hover{ transform: translateY(-1px) }
+button:active{ transform: translateY(0) }
+button.secondary{ background:#1f2a44 }
+button:disabled{ opacity:.6; cursor:not-allowed }
+
+.h-intent { font-size:14px; opacity:.8 }
+
+/* -------------------
+   MARKDOWN STYLES
+------------------- */
+.bubble h1,.bubble h2,.bubble h3{ margin:8px 0 6px }
+.bubble p{ margin:6px 0 }
+.bubble code{
+  background:#0b1320;
+  padding:2px 6px;
+  border-radius:6px
+}
+.bubble pre{
+  background:#0b1320;
+  padding:10px;
+  border-radius:10px;
+  overflow:auto
+}
+.bubble table{ border-collapse:collapse; width:100%; margin:6px 0 }
+.bubble th,.bubble td{
+  border:1px solid var(--border);
+  padding:8px;
+  text-align:left;
+  vertical-align:top
+}
+.bubble thead th{ background:#14243a; font-weight:700 }
+.bubble table tr:hover{ background: rgba(255,255,255,.04) }
+
+/* -------------------
+   SPINNER / CARET
+------------------- */
+.spinner{
+  width:18px; height:18px;
+  border:3px solid #ffffff33; border-top-color:#fff;
+  border-radius:50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg) } }
+
+.caret{
+  display:inline-block;
+  margin-left:4px;
+  width:10px; height:1.1em;
+  border-right:2px solid #fff;
+  animation: blink 1s steps(1,end) infinite;
+  vertical-align: text-bottom;
+}
+@keyframes blink { 0%,100%{opacity:0} 50%{opacity:1} }
+
+/* -------------------
+   ENTRANCE ANIMATIONS
+------------------- */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(8px) scale(.98) }
+  to   { opacity: 1; transform: translateY(0)   scale(1) }
+}
+@keyframes popIn {
+  from { opacity: 0; transform: scale(.98) }
+  to   { opacity: 1; transform: scale(1) }
+}
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+.animate-in { animation: fadeSlideUp .4s ease-out both }
+.pop-in     { animation: popIn .24s ease-out both }
+.slide-up   { animation: fadeSlideUp .35s ease-out both }
+.fade-in    { animation: fadeIn .4s ease-out both }
+
+/* -------------------
+   TOAST
+------------------- */
+.toast{
+  position: fixed; right: 18px; bottom: 18px;
+  background: #0b1320; color: #e8f6ff;
+  border: 1px solid var(--border);
+  padding: 10px 12px;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transform: translateY(10px) scale(.98);
+  transition: opacity .25s ease, transform .25s ease;
+  pointer-events: none;
+  z-index: 50;
+}
+.toast.show{
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* -------------------
+   FOOTER
+------------------- */
+footer.foot{
+  margin: 18px 0 6px;
+  text-align:center;
+  opacity:.6;
+  font-size:12px;
+}
